@@ -27,7 +27,6 @@ h=abs(x11(2)-x11(1));
 T=10;
 dt = 0.0001;
 time = 0:dt:T;
-tv=0; 
 % 10 dimensionless time points altogether, dt set to be 0.0001 in the
 % numerical solver.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%
