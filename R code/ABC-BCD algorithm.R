@@ -165,7 +165,7 @@ mean(bcd_all3_r9_nonan[,2]) # Avg BCD: 0.4080612
 ###### A function that carries out all the steps in the algorithm, it takes ###########
 ###### two input arguments, the array of Bhattacharya distance results and  ###########
 ###### the array of corresponding parameter vectors, at the end, it returns ###########
-###### the parameters that will be used in the next round.                  ###########
+###### the parameter values that will be used in the next round.            ###########
 
 Rejcon_bcd<-function(ss_mat,paras) {
   ss_mat<-as.matrix(ss_mat) # Set the Bhattacharya distance array
@@ -211,7 +211,7 @@ Rejcon_bcd<-function(ss_mat,paras) {
   
   paras_nr_unperturbed<-paras[resamp_ind,] # Resampled parameter vectors, without perturbation.
   
-  paras_nr_perturbed<-matrix(0,nrow = nrow(paras),ncol = ncol(paras)) # An empty matrix used to store the perturbed parameter values.
+  paras_nr_perturbed<-matrix(0,nrow = nrow(paras),ncol = ncol(paras)) # An empty matrix to store the perturbed parameter values.
   
   for (i in 1:length(paras[1,])) {
     for (j in 1:length(paras[,1])){
