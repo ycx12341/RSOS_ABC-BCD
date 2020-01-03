@@ -1,4 +1,4 @@
-MATLAB CODE
+MATLAB Code
 ============
 
 This folder includes MATLAB code of:
