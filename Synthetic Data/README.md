@@ -2,7 +2,7 @@
 
 The folder "1st attempt" contains all the synthetic data generated in the first attempt described in Xiao et al. "Calibrating models of cancer invasion and metastasis: parameter optimization using Approximate Bayesian Computation."
 
-Some key files: 
+## Some key files ##: 
 
 * **mean_var_obs.txt**: Means and variances of the 900 reference time series.
 
@@ -10,7 +10,7 @@ Some key files:
 
 * **Round 10 parameters 10000 all 3.txt**: Final parameters, the means of parameter columns were taken as the final estimates of the parameters. 
 
-How are the synthetic data produced?
+## How are the synthetic data produced? ##
 
 * Initially, sample 10000 values for each parameter from its initial distribution, (as stated in the manuscript), form them into a 10000x6 table in a random order. This table is written into "**Round 1 parameters 10000 ecm.txt**"
 
