@@ -168,3 +168,4 @@ fprintf(fileID,'%4d %5.4f\r\n',i,sum(bcd_vec_2));
 % The Bhattacharya distance of the parameter vector in relation to the
 % reference parameter values will be written in the .txt file.
 fclose(fileID);
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
