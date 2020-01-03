@@ -1,3 +1,10 @@
+% MATLAB code calculates a single vector of parameter values in relation to the reference ones.
+
+% Used in: Xiao et al. "Calibrating models of cancer invasion and metastasis: parameter optimization
+% using Approximate Bayesian Computation."
+
+% Author: Yunchen Xiao
+
 %%%%%%%%%%%%%%% Environment setting %%%%%%%%%%%%%%%
 clc
 clear all
