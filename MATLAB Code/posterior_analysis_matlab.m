@@ -1,3 +1,4 @@
+%%%%%%%%%%%%%%%% Environment setting %%%%%%%%%%%%%%%%%%%%%%%%%
 clc
 clear all
 close all
@@ -8,14 +9,12 @@ set(0,'defaultaxeslinewidth',1)
 set(0,'defaultpatchlinewidth',1)
 set(0,'defaultlinelinewidth',4)
 set(0,'defaultTextInterpreter','latex')
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-%ECM plot of eta
+%%%%%%%%%%% ECM: Density plot of eta while inferring ECM profile %%%%%%%%%%%%%
 ecm_r1 = readtable("Round 1 parameters 10000 ecm.txt");
-
 ecm_r2 = readtable("Round 2 parameters 10000 ecm.txt");
-
 ecm_r3 = readtable("Round 3 parameters 10000 ecm.txt");
-
 ecm_post = readtable("Round 4 parameters 10000 ecm.txt");
 
 eta_r1 = table2array(ecm_r1(:,4));
@@ -40,18 +39,15 @@ hold off;
 lgd = legend({'Initial density(ECM)','Post-round 1 density(ECM)','Post-round 2 density(ECM)','Post-round 3 density(ECM)'},'Location','northeast','Orientation','vertical','Fontsize',12);
 xlabel('$\eta$ values')
 ylabel('Probability density')
+% Read the parameter file, kernel smooth the probability densities and plot them.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-%MDE plot of dm and alpha
+%%%%%%%%%%%%%% MDE: Density plots of dm and alpha while inferring MDE profile %%%%%%%%%%%%%%%
 ecm_mde_r1 = readtable("Round 1 parameters 10000 ecm_mde.txt");
-
 ecm_mde_r2 = readtable("Round 2 parameters 10000 ecm_mde.txt");
-
 ecm_mde_r3 = readtable("Round 3 parameters 10000 ecm_mde.txt");
-
 ecm_mde_r4 = readtable("Round 4 parameters 10000 ecm_mde.txt");
-
 ecm_mde_r5 = readtable("Round 5 parameters 10000 ecm_mde.txt");
-
 ecm_mde_post = readtable("Round 6 parameters 10000 ecm_mde.txt");
 
 dm_r1 = table2array(ecm_mde_r1(:,5));
@@ -112,26 +108,20 @@ hold off;
 legend({'Initial density(ECM&MDE)','Post-round 1 density(ECM&MDE)','Post-round 2 density(ECM&MDE)','Post-round 3 density(ECM&MDE)','Post-round 4 density(ECM&MDE)','Post-round 5 density(ECM&MDE)'},'Location','northeast','Orientation','vertical','Fontsize',10)
 xlabel('$\alpha$ values')
 ylabel('Probability density')
+% Note that due to the different scales of parameter values, different bandwidths were chosen to kernel smooth the probability
+% densities for the best visual effect.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-%TC dn,gamma,rn
+%%%%%%%%%%%%%%%%%%%%%% Tumour cells: Density plots of dn,gamma,rn while inferring the tumour cells profile %%%%%%%%%%%%%%%%%%%%
 all3_r1 = readtable("Round 1 parameters 10000 all 3.txt");
-
 all3_r2 = readtable("Round 2 parameters 10000 all 3.txt");
-
 all3_r3 = readtable("Round 3 parameters 10000 all 3.txt");
-
 all3_r4 = readtable("Round 4 parameters 10000 all 3.txt");
-
 all3_r5 = readtable("Round 5 parameters 10000 all 3.txt");
-
 all3_r6 = readtable("Round 6 parameters 10000 all 3.txt");
-
 all3_r7 = readtable("Round 7 parameters 10000 all 3.txt");
-
 all3_r8 = readtable("Round 8 parameters 10000 all 3.txt");
-
 all3_r9 = readtable("Round 9 parameters 10000 all 3.txt");
-
 all3_post = readtable("Round 10 parameters 10000 all 3.txt");
 
 [s,xxxii] = ksdensity(table2array(all3_r2(:,2)),'Bandwidth',0.0001641);
@@ -235,8 +225,9 @@ legend({'Initial density(All 3)','Post-round 1 density(All 3)','Post-round 2 den
 hold off;
 xlabel('$r_n$ values')
 ylabel('Probability density')
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-%Prior and posterior only
+%%%%%%%%%%%%%%%%%%%%%%% Initial and final densities only %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 [k,l] = ksdensity(table2array(all3_post(:,4)),'Bandwidth',0.3014);
 
 figure
@@ -326,8 +317,10 @@ hold off;
 lgd = legend({'Initial density','Final density','True value'},'Location','northeast','Orientation','vertical','Fontsize',15);
 xlabel('$r_n$ values')
 ylabel('Probability density')
+% Initial and final densities of the parameters.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-%ECM eta evolution in MDE
+%%%%%%%%%%%%%%% ECM: Densities of eta while inferring the MDE profile %%%%%%%%%%%%%%%%%%%%%%%%%%%%
 [k,xxi] = ksdensity(table2array(ecm_mde_r1(:,4)),'Bandwidth',0.3014);
 [s,xxii] = ksdensity(table2array(ecm_mde_r2(:,4)),'Bandwidth',0.3014);
 [d,xxiii] = ksdensity(table2array(ecm_mde_r3(:,4)),'Bandwidth',0.3014);
@@ -350,8 +343,9 @@ hold off;
 legend({'Round 1 density(ECM&MDE)','Post-round 1 density(ECM&MDE)','Post-round 2 density(ECM&MDE)','Post-round 3 density(ECM&MDE)','Post-round 4 density(ECM&MDE)','Post-round 5 density(ECM&MDE)'},'Location','northeast','Orientation','vertical','Fontsize',10)
 xlabel('$\eta$ values')
 ylabel('Probability density')
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-%ECM eta evolution in TC
+%%%%%%%%%%%%%% ECM: Densities of eta while inferring the tumour cells profile. %%%%%%%%%%%%%%%%%%%%%%
 [k,xxxi] = ksdensity(table2array(all3_r1(:,4)),'Bandwidth',0.3014);
 [s,xxxii] = ksdensity(table2array(all3_r2(:,4)),'Bandwidth',0.3014);
 [d,xxxiii] = ksdensity(table2array(all3_r3(:,4)),'Bandwidth',0.3014);
@@ -386,8 +380,9 @@ legend({'Round 1 density(All 3)','Post-round 1 density(All 3)','Post-round 2 den
 hold off;
 xlabel('$\eta$ values')
 ylabel('Probability density')
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-%MDE dm all 3
+%%%%%%%%%%%%%%% MDE: Densities of dm, alpha while inferring tumour cells profile %%%%%%%%%%%%%%%%%%%%%%%
 [k,xxxi] = ksdensity(table2array(all3_r1(:,5)),'Bandwidth',0.000902);
 [s,xxxii] = ksdensity(table2array(all3_r2(:,5)),'Bandwidth',0.000902);
 [d,xxxiii] = ksdensity(table2array(all3_r3(:,5)),'Bandwidth',0.000902);
@@ -457,23 +452,4 @@ legend({'Round 1 density(All 3)','Post-round 1 density(All 3)','Post-round 2 den
 hold off;
 xlabel('$\alpha$ values')
 ylabel('Probability density')
-
-%Auxiliary particle filter plots
-%prior_joint_paras = readtable("Joint prior parameters.txt");
-%post_joint_paras = readtable("Joint posterior parameters.txt");
-%prop_joint_paras = readtable("Joint proposal parameters.txt");
-%flat_joint_paras = readtable("Joint flattened posterior parameters.txt");
-
-%[k,xxxi] = ksdensity(table2array(prior_joint_paras(:,2)));
-%[s,xxxii] = ksdensity(table2array(post_joint_paras(:,2)));
-%[d,xxxiii] = ksdensity(table2array(prop_joint_paras(:,2)));
-%[z,xxxiv] = ksdensity(table2array(flat_joint_paras(:,2)));
-
-%plot(xxxi,k,'b-')
-%xlim([-0.000005 0.000015])
-%hold on;
-%plot(xxxii,s,'g-',xxxiii,d,'r-',xxxiv,z,'k-')
-%legend({'Joint prior density','Joint posterior density','Joint proposal density','Flattened joint posterior density'},'Location','northeast','Orientation','vertical','Fontsize',10)
-%hold off;
-%xlabel('Joint para. values')
-%ylabel('Probability density')
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
