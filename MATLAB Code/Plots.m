@@ -1,3 +1,4 @@
+%%%%%%%%%%%%%%% Environment setting %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 clc
 clear all
 close all
@@ -8,6 +9,7 @@ set(0,'defaultaxeslinewidth',1)
 set(0,'defaultpatchlinewidth',1)
 set(0,'defaultlinelinewidth',4)
 set(0,'defaultTextInterpreter','latex')
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %%%%%%%%%% ECM: Density plots of eta while inferring the ECM profile %%%%%%%%%%%%%%%%%%%%%%%
 ecm_r1 = readtable("Round 1 parameters 10000 ecm.txt");
@@ -42,7 +44,7 @@ xlabel('$\eta$ values')
 ylabel('Probability density')
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-%%% MDE: Density plots of dm and alpha while inferring the MDE profile %%%
+%%%%%%%%%%%% MDE: Density plots of dm and alpha while inferring the MDE profile %%%%%%%%%%%%%%%%%
 ecm_mde_r1 = readtable("Round 1 parameters 10000 ecm_mde.txt");
 
 ecm_mde_r2 = readtable("Round 2 parameters 10000 ecm_mde.txt");
@@ -113,9 +115,9 @@ hold off;
 legend({'Prior density(ECM&MDE)','Post-round 1 density(ECM&MDE)','Post-round 2 density(ECM&MDE)','Post-round 3 density(ECM&MDE)','Post-round 4 density(ECM&MDE)','Post-round 5 density(ECM&MDE)'},'Location','northeast','Orientation','vertical','Fontsize',10)
 xlabel('$\alpha$ values')
 ylabel('Probability density')
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-%%% TC: Density plots of dn,gamma,rn while inferring the TC profile.%%%%%%
+%%%%%%%%%%%% Tumour cells: Density plots of dn,gamma,rn while inferring the tumour cells profile. %%%%%%%%%%%%%%%
 all3_r1 = readtable("Round 1 parameters 10000 all 3.txt");
 
 all3_r2 = readtable("Round 2 parameters 10000 all 3.txt");
@@ -237,7 +239,7 @@ legend({'Prior density(All 3)','Post-round 1 density(All 3)','Post-round 2 densi
 hold off;
 xlabel('$r_n$ values')
 ylabel('Probability density')
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %%%%%% Prior and posterior densities only %%%%%%%%%%%%%%%%%%%%%%%%%
 [k,l] = ksdensity(table2array(all3_post(:,4)),'Bandwidth',0.3014);
