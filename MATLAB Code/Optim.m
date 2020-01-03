@@ -1,3 +1,11 @@
+% Standard optimizer aims to find the set of parameter values that minimize the Bhattacharyya distance between 
+% its simulated time series and the observed time series. 
+
+% Used in: Xiao et al. "Calibrating models of cancer invasion and metastasis: parameter optimization using Approximate
+% Bayesian Computation."
+
+% Author: Yunchen Xiao
+
 x0 = [0.0100345,0.1325,6.25,12.5,0.01655,0.125];
 % Starting values of the optimizing function.
 options = optimset('Display','iter');
