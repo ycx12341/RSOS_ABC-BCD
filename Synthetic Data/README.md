@@ -6,9 +6,9 @@ The folder "1st attempt" contains all the synthetic data generated in the first 
 
 * **mean_var_obs.txt**: Means and variances of the 900 reference time series.
 
-* **Round 1 parameters 10000 ecm.txt**: Initial parameters, all parameter values sampled from corresponding initial distributions using "r" command in R.
+* **Round 1 parameters 10000 ecm.txt**: Initial parameters, all parameter values are sampled from corresponding initial distributions using "runif" command in R.
 
-* **Round 10 parameters 10000 all 3.txt**: Final parameters, the means of parameter columns were taken as the final estimates of the parameters. 
+* **Round 10 parameters 10000 all 3.txt**: Final parameters, the means of parameter columns are taken as the final estimates of the parameters. 
 
 ## How are the synthetic data produced? ##
 
