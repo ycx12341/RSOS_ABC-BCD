@@ -1,3 +1,10 @@
+% Probability density plots of different parameters at the end of different rounds. 
+
+% Used in: Xiao et al. "Calibrating models of cancer invasion and metastasis: parameter optimizatrion using 
+% Approximate Bayesian Computation."
+
+% Author: Yunchen Xiao
+
 %%%%%%%%%%%%%%%% Environment setting %%%%%%%%%%%%%%%%%%%%%%%%%
 clc
 clear all
