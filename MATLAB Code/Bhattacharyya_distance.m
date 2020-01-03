@@ -1,3 +1,4 @@
+%%%%%%%%%%%%%% Environment setting ##########################
 clc
 clear all
 close all
@@ -8,6 +9,7 @@ set(0,'defaultaxeslinewidth',1)
 set(0,'defaultpatchlinewidth',1)
 set(0,'defaultlinelinewidth',4)
 set(0,'defaultTextInterpreter','latex')
+##############################################################
 
 paras = readtable('.txt'); 
 % Read the table of parameter values.
@@ -32,32 +34,24 @@ time = 0:dt:T;
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %%%%%%%%% Parameters %%%%%%%%%%%%%%%
-
 dn = table2array(paras(:,2));
-
-
 gamma = table2array(paras(:,3));
-
-
 ita = table2array(paras(:,4));
-
-
 dm = table2array(paras(:,5));
-
-
 alpha = table2array(paras(:,6));
-
 r = table2array(paras(:,7)); 
 % For each parameter in the PDE system, read its values from the table and
 % change the format to array. 
-
 beta = 0;
 eps = 0.01; 
+%%% These two parameters are fixed at all time.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-%%%%%%%%% Initial condition %%%%%%%%%%%
-n0 = repelem(0,length(x11));
-
+%%%%%%%%% Initial conditions %%%%%%%%%%%
+n0 = repelem(0,length(x11)); 
+% An empty vector of length 300, values will be appended into the vector 
+% later on as the initial condition of tumour cells. 
+                            
 for i = 1:length(x11)
     if x11(i)<=0.25
         n0(i)=exp(-(x11(i)^2)/eps);
@@ -66,13 +60,13 @@ for i = 1:length(x11)
     end 
 end
 
-n = n0;
+n = n0; # Initialize the tumour cells vector.
 
-f0 = 1-0.5*n0;
-f=f0;
+f0 = 1-0.5*n0; # Initial condition of ECM.
+f=f0; # Initialize the ECM vector.
 
-m0=0.5*n0; 
-m = m0;
+m0=0.5*n0; # Initial condition of MDE.
+m = m0; # Initialize the MDE vector.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %%% Array of initial values %%%
@@ -106,7 +100,10 @@ m = inits(3,:);
 
 p=1;
 %%% Results array %%%%%
-res = [];
+res = []; % An empty array, used to store the results obtained in 
+          % later steps.
+%%%%%%%%%%%%%%%%%%%%%%%
+
 %%%%%%%%%% Numerical PDE solver %%%%%%%%%%%%%
 while p*dt<=T
     f(2:length(x11)-1) = -ita(i)*dt*m(2:length(x11)-1).*f(2:length(x11)-1)+f(2:length(x11)-1);
@@ -140,33 +137,35 @@ while p*dt<=T
 end
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+%%%%%%%%%% Results rearrangements %%%%%%%%%%%%%%%%%%%%%%%%%
 res_arr = zeros(30,300);
 
 res_arr(1:10,:) = res(1:3:28,:);
 res_arr(11:20,:) = res(2:3:29,:);
 res_arr(21:30,:) = res(3:3:30,:); 
-% Rearrange the result array, row 1-10, TC, row 11-20, ECM, row 21-30, MDE.
+% Rearrange the result array, row 1-10, Tumour cells, row 11-20, ECM, row 21-30, MDE.
 
 mean_var = zeros(900,2); 
-% Rearrange the summary statistics.
+% A zero matrix of 900*2, used to store summary statistics(mean & variance) of the 
+% time series.
 
 mean_var(1:300,1) = mean(res_arr(1:10,:)); 
-% mean of the TC time series.
+% Means of the tumour cells time series.
 mean_var(1:300,2) = var(res_arr(1:10,:)); 
-% variance of the TC time series.
+% Variances of the TC time series.
 
 mean_var(301:600,1) = mean(res_arr(11:20,:)); 
-% mean of the ECM time series.
+% Means of the ECM time series.
 mean_var(301:600,2) = var(res_arr(11:20,:)); 
-% variance of the ECM time series.
+% Variances of the ECM time series.
 
 mean_var(601:900,1) = mean(res_arr(21:30,:)); 
-% mean of the MDE time series.
+% Means of the MDE time series.
 mean_var(601:900,2) = var(res_arr(21:30,:)); 
-% variance of the MDE time series
+% Variances of the MDE time series
 
 bcd_vec=[];
-% Create an empty vector, store the Bhattacharya distance of each time
+% Create an empty vector, store the Bhattacharyya distance of each time
 % series in relation to the corresponding observed one. 
 
 for j = 1:900 
@@ -180,7 +179,7 @@ end
 % of ECM were considered (301:600), when we moved on to estimate the MDE 
 % parameters (dm, alpha), we summed up the B-C distance among MDE time 
 % series and ECM time series that have been evaluated before. (301:900), 
-% finally, when the TC parameters were estimated (dn, gamma, rn), 
+% finally, when the tumour cells parameters were estimated (dn, gamma, rn), 
 % we summed up the B-C distance among all the time series. (1:900)
 
 inv_index = find(bcd_vec == Inf);
@@ -188,10 +187,10 @@ inv_term = length(inv_index);
 
 bcd_vec_2 = bcd_vec;
 bcd_vec_2(inv_index) = []; 
-% Locate the invalid terms, exclude them from the B-C distance calculation. 
+% Locate the invalid terms, exclude them from the vector. 
 
 bcd_sum = [bcd_sum,sum(bcd_vec_2)]; 
-% Sum up the Bhattacharya distance of the time series.
+% Sum up the Bhattacharyya distance of the time series.
 
 fileID = fopen('.txt','a');
 fprintf(fileID,'%4d %5.4f\r\n',i,sum(bcd_vec_2));
