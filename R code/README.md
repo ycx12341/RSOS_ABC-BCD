@@ -1,6 +1,4 @@
 ## R code ##
-============
-============
 
 This folder includes R code of:
 
