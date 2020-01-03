@@ -5,3 +5,5 @@ This following supplementary materials used in Xiao et al. "Calibrating models o
 * MATLAB code.  
 * R code. 
 * Synthetic data.
+
+Please check the README.md in the separate folder for more details of the files. 
