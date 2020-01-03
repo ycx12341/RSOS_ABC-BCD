@@ -9,7 +9,8 @@
 
 # A function that carries out all the steps in the ABC-BCD scheme described in the manuscript.
 # It takes two input arguments, the array of Bhattacharya distance results and the array of corresponding parameter vectors, 
-# at the end, it returns the parameter values for the next round of optimization.
+# at the end, it returns the parameter values for the next round of optimization. All detailed steps were kept in the function 
+# for our readers to have a clear understanding on the function. 
 
 Rejcon_bcd <- function(ss_mat,paras) {
   ss_mat <- as.matrix(ss_mat) 
