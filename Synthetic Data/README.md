@@ -2,7 +2,7 @@
 
 The folder "1st attempt" contains all the synthetic data generated in the first attempt described in Xiao et al. "Calibrating models of cancer invasion and metastasis: parameter optimization using Approximate Bayesian Computation."
 
-## Some key files ##: 
+## Some key files: 
 
 * **mean_var_obs.txt**: Means and variances of the 900 reference time series.
 
