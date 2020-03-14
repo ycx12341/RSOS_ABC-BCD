@@ -156,14 +156,6 @@ for (i in 1:49) {
   }
 }
 
-# LHS based on data only
-
-#for (i in 1:49) {
-#  for (j in 1:48) {
-#    grad_lhs_f_data[i,j] <- (res_f_perturbed[i+2,j+1] - res_f_perturbed[i,j+1])/ (2* 0.1)
-#  }
-#}
-
 grad_rhs_f_ita <- matrix(0,49,48)
 
 for (i in 1:49) {
@@ -274,66 +266,3 @@ opt <- optim(start.values, obj, grad.lhs_n = grad_lhs_n_data, grad.rhs_dn = grad
       grad.rhs_r = grad_rhs_n_r, grad.lhs_f = grad_lhs_f_data, grad.rhs_ita = grad_rhs_f_ita,
       grad.lhs_m = grad_lhs_m_data, grad.rhs_dm = grad_rhs_m_dm, grad.rhs_alpha = grad_rhs_m_alpha, obs_val = c(dat_n$n, dat_f$f, dat_m$m),
       fitted_val = c(spl$fitted.values, spl2$fitted.values, spl3$fitted.values), hessian = TRUE)
-
-# Estimated solution 
-res_est <- matrix(0, 3, n.x11)
-res_est [1, ] <- n0
-res_est [2, ] <- f0
-res_est [3, ] <- m0
-
-kkk <- read.table("Estimated parameter values sd 0.02 sdpar.txt",sep="")
-dn_est <- mean(kkk[2:101,1])
-gamma_est <- mean(kkk[2:101,2])
-rn_est <- mean(kkk[2:101,3])
-eta_est <- mean(kkk[2:101,4])
-dm_est <- mean(kkk[2:101,5])
-alpha_est <- mean(kkk[2:101,6])
-
-p <- 1
-while(p * dt <= T) {
-  f[2:49] <- -eta_est * dt * m[2:49] * f[2:49] + 
-    f[2:49]
-  
-  m[2:49] <- dm_est * (m[1:48] + m[3:50] - 2 * m[2:49]) * dt / (h ^ 2) +
-    alpha_est * n[2:49] * dt -  
-    beta * m[2:49] * dt + m[2:49]
-  
-  n[2:49] <- dn_est * (n[1:48] + n[3:50] - 2 * n[2:49]) * dt / (h ^ 2) -  
-    gamma_est * (n[3:50] - n[2:49]) * (f[3:50]-f[2:49]) * dt / (h ^ 2) - 
-    gamma_est * n[2:49] * (f[1:48] + f[3:50] - 2 * f[2:49]) * dt / (h ^ 2) + 
-    rn_est * (1 - f[2:49] - n[2:49]) * n[2:49] * dt + n[2:49]
-  
-  #No flux boundary condition
-  n[1] <- n[2]
-  n[n.x11] <- n[n.x11 - 1]
-  
-  f[1] <- f[2]
-  f[n.x11] <- f[n.x11 - 1]
-  
-  m[1] <- m[2]
-  m[n.x11] <- m[n.x11 - 1]
-  
-  #res_full<-rbind(res_full,n,f,m)
-  
-  # Save the results at each t = 0.1*k (k as positive integers) time steps
-  if(p %% 100 == 0) {
-    res_est <- rbind(res_est, n, f, m)
-  }
-  
-  p <- p + 1
-}
-
-res_n_est <- res_est[seq(1,151,by = 3),]
-res_f_est <- res_est[seq(2,152,by = 3),]
-res_m_est <- res_est[seq(3,153,by = 3),]
-
-par(mfrow=c(1,2))
-plot(x11, res_n[21,],'l', lwd = 3, ylim=c(0,1))
-lines(x11, res_f[21,],'l', lwd = 3, col="blue")
-lines(x11, res_m[21,],'l', lwd = 3, col="red")
-
-plot(x11, res_n_est[21,],'l', lwd = 3, ylim=c(0,1))
-lines(x11, res_f_est[21,],'l', lwd = 3, col="blue")
-lines(x11, res_m_est[21,],'l', lwd = 3, col="red")
-
-ggg <- read.table("Estimated parameter values sd 0.04.txt",sep="")
