@@ -1,9 +1,12 @@
-## RSOS_ABC-BCD ##
+## RSOS_ABC-BCD & G.M. ##
 
-This following supplementary materials used in Xiao et al. "Calibrating models of cancer invasion and metastasis: parameter optimization using Approximate Bayesian Computation." are listed in this repository:
+This following supplementary materials used in Xiao et al. "" are listed in this repository:
 
-* MATLAB code.  
-* R code. 
-* Synthetic data.
+* MATLAB code used for ABC-BCD scheme.  
+* R code used for ABC-BCD scheme. 
+* Synthetic data generated using ABC-BCD scheme.
+
+* R code used for G.M. scheme
+* Synthetic data generated using G.M. scheme.
 
 Please check the README.md in the separate folder for more details of the files. 
