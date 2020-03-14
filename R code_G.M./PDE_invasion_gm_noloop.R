@@ -87,14 +87,12 @@ while(p * dt <= T) {
 # Objective function. 
 obj <- function(paras, grad.lhs_n, grad.rhs_dn, grad.rhs_gamma, grad.rhs_r, 
                 grad.lhs_f, grad.rhs_ita, 
-                grad.lhs_m, grad.rhs_dm, grad.rhs_alpha, obs_val, fitted_val) {
+                grad.lhs_m, grad.rhs_dm, grad.rhs_alpha) {
   
   disp1 <- sum((grad.lhs_f + paras[4] * grad.rhs_ita)^2)
   disp2 <- sum((grad.lhs_m - (paras[5] * grad.rhs_dm + paras[6] * grad.rhs_alpha))^2)
   disp3 <- sum((grad.lhs_n - (paras[1] * grad.rhs_dn - paras[2] * grad.rhs_gamma + paras[3] * grad.rhs_r))^2)
-  
-  disp4 <- sum((fitted_val-obs_val)^2)
-  res <- sum(disp1,disp2,disp3,disp4)
+  res <- sum(disp1,disp2,disp3)
   
   #if (debug) cat(dn, res, "\n")
   return(res)
@@ -264,5 +262,4 @@ start.values = c(0.02,0.1,10,20,0.02,0.2)
 
 opt <- optim(start.values, obj, grad.lhs_n = grad_lhs_n_data, grad.rhs_dn = grad_rhs_n_dn, grad.rhs_gamma = grad_rhs_n_gamma,
       grad.rhs_r = grad_rhs_n_r, grad.lhs_f = grad_lhs_f_data, grad.rhs_ita = grad_rhs_f_ita,
-      grad.lhs_m = grad_lhs_m_data, grad.rhs_dm = grad_rhs_m_dm, grad.rhs_alpha = grad_rhs_m_alpha, obs_val = c(dat_n$n, dat_f$f, dat_m$m),
-      fitted_val = c(spl$fitted.values, spl2$fitted.values, spl3$fitted.values), hessian = TRUE)
+      grad.lhs_m = grad_lhs_m_data, grad.rhs_dm = grad_rhs_m_dm, grad.rhs_alpha = grad_rhs_m_alpha, hessian = TRUE)
