@@ -18,7 +18,7 @@ This contains all the synthetic data generated in the first attempt described in
 
 * Now use function **abc_bcd()** to carry out the ABC-BCD optimization scheme. Read in "**Round 1 parameters 10000 ecm.txt**" and "**B-C distance ecm r1.txt**" as arguments "paras" and "ss_mat". The result of the function is written in "**Round 2 parameters 10000 ecm.txt**"
 
-A full round for the evaluation of ECM profile is complete. After 3 rounds are carried out for the evaluation of ECM profile, we extract the sample of parameter eta, (4th column in "**Round 4 parameters 10000 ecm.txt**"), set it to be the 4th column of "**Round 1 parameters 10000 ecm_mde.txt**", sample the other parameter values from their initial distribution. 
+A full round for the evaluation of ECM profile is complete. After 3 rounds are carried out for the evaluation of ECM profile, we extract the sample of parameter eta, (4th column in "**Round 4 parameters 10000 ecm.txt**"), set it to be the 4th column of "**Round 1 parameters 10000 ecm_mde.txt**", sample the other parameter values from their initial distribution. Function **bcd()** needs to be reloeaded with 
 
 After 5 rounds are carried out for the evaluation of MDE profile, we extract the samples of parameter eta, dm, alpha (4th, 5th, 6th column of "**Round 6 parameters 10000 ecm_mde.txt**"), set them to be the 4th, 5th, 6th column of "**Round 1 parameters 10000 all 3.txt**", sample the other parameter values from their initial distribution. 
 
