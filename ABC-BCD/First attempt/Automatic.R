@@ -1,6 +1,7 @@
-paras <- read.table("Round 1 parameters 10000 ecm.txt",sep="")
+#### ABC-BCD scheme ####################
+#### Author: Yunchen Xiao  #############
 
-# paras_sub <- paras[1:50,]
+paras <- read.table("Round 1 parameters 10000 ecm.txt",sep="")
 
 bcd <- function(paras) {
   
