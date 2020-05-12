@@ -120,7 +120,7 @@ bcd <- function(paras) {
     
     bcd_vec <- vector();
     
-    for (j in 1:240) {
+    for (j in 81:160) {
       bcd <- 0.25*log(0.25*((mean_var[j,2]/mean_var_obs[j,2])+(mean_var_obs[j,2]/mean_var[j,2])+2))+0.25*(((mean_var[j,1]-mean_var_obs[j,1])^2)/(mean_var_obs[j,2]+mean_var[j,2]));
       bcd_vec <- c(bcd_vec,bcd);
     } 
