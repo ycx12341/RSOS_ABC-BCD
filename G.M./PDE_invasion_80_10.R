@@ -1,3 +1,6 @@
+### Gradient matching scheme ########
+### Author: Yunchen Xiao & Len Thomas ###########
+
 library(mgcv)
 library(tictoc)
 
@@ -121,7 +124,7 @@ for (q in 1:2) {
   
   for (j in 1:11){
     for (k in 1:80){
-      res_n_perturbed[j,k] <- rgamma(1, 10000, 10000/res_n[j,k])
+      res_n_perturbed[j,k] <- rgamma(1, 10000, 10000/res_n[j,k]) # Elements in rgamma() here need to be changed for different coefficient of variation.
       res_f_perturbed[j,k] <- rgamma(1, 10000, 10000/res_f[j,k])
       res_m_perturbed[j,k] <- rgamma(1, 10000, 10000/res_m[j,k])
     }
@@ -359,6 +362,8 @@ toc()
 stopCluster(cl)
 
 ###### Results #############
+
+###### Parameter estimations under CV = 0.01 ########################
 res_001 <- read.table("CV 0.01 parameters.txt",sep="", header = TRUE)
 
 mean(res_001[2:101,1]) # dn = 0.008122803
@@ -368,12 +373,14 @@ mean(res_001[2:101,4]) # eta = 10.24825
 mean(res_001[2:101,5]) # dm = 0.008587306
 mean(res_001[2:101,6]) # alpha = 0.09681687
 
+##### Monte-Carlo errors under CV = 0.01 ######################
 sd(res_001[2:101,1])/10 # 0.0003127172
 sd(res_001[2:101,2])/10 # 0.0009109091
 sd(res_001[2:101,3])/10 # 0.08036701
 sd(res_001[2:101,4])/10 # 0.1439303
 sd(res_001[2:101,5])/10 # 0.0009880688
 
+##### Monte-Carlo error rates ###########################
 sd(res_001[2:101,1])/10/0.01 # 3.1%
 sd(res_001[2:101,2])/10/0.05 # 1.8%
 sd(res_001[2:101,3])/10/5 # 1.6%
