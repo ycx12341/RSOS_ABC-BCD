@@ -1,4 +1,4 @@
-## Extra attempt 1 (Consistency checking) ##
+## Extra attempt 2 (Consistency checking) ##
 
 This folder contains the synthetic data and results obtained in the second extra attempt of consistency analysis. 
 
