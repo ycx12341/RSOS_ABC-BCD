@@ -1,9 +1,9 @@
 ######## Results ###############
 
 # To reproduce the results here, set.seed(123) should be used within the abc_bcd algorithm. 
-# Cluster formation
 
-library(cluster)
+# Cluster formation
+library(doParallel)
 cl <- makeCluster(detectCores() - 1) 
 registerDoParallel(cl)
 
